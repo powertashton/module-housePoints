@@ -27,7 +27,7 @@ $sql = "SELECT hpPointStudent.hpID,
     hpPointStudent.points,
     hpCategory.categoryName,
     hpPointStudent.reason,
-    CONCAT(gibbonPerson.title, ' ', gibbonPerson.surname) AS teacherName
+    CONCAT(gibbonPerson.title, ' ', gibbonPerson.preferredName, ' ', gibbonPerson.surname) AS teacherName
     FROM hpPointStudent
     INNER JOIN hpCategory
     ON hpCategory.categoryID = hpPointStudent.categoryID
