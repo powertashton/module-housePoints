@@ -33,8 +33,8 @@ if ($houseID == 0) {
 if ($categoryID == 0) {
     $msg .= "Please select a category<br />"; 
 }
-if ($points<1 || $points>10) {
-    $msg .= "Please award between 1 and 10 points<br />"; 
+if ($points<1 || $points>200) {
+    $msg .= "Please award between 1 and 200 points<br />"; 
 }
 
 if ($msg == '') {

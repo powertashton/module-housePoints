@@ -259,3 +259,30 @@ function showClassPoint(classID) {
         }
     });
 }
+
+function updateCategoryPoints() {
+    $.ajax({
+        url: modpath + "/category_points_ajax.php",
+        data: {
+            categoryID: $('#categoryID').val()
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function(data) {
+            // console.log(data);
+            var parent = $('#points').parent();
+            $('#points').detach().remove();
+
+            if (data !== null) {
+                var points = $('<select/>').attr('name', 'points').attr('id', 'points').attr('class', 'standardWidth');
+                $.each(data, function(value, label) {
+                    points.append($("<option/>").attr("value", parseInt(value)).text(label));
+                });
+                parent.append(points);
+            } else {
+                var points = $('<input type="text" id="points" name="points" value="1" class="standardWidth" min="1" max="200" />');
+                parent.append(points);
+            }
+        }
+    });
+}
