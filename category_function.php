@@ -1,4 +1,6 @@
 <?php
+use Gibbon\Forms\Form;
+
 class cat {
     
     function cat($guid, $connection2) {
@@ -33,14 +35,30 @@ class cat {
     
     
     function formDefine() {
-        echo "<td style='width:70%'>";
-            echo "<input type='hidden' name='categoryID' value='".$this->categoryID."' />";
-            echo "<input type='text' name='categoryName' value='".$this->categoryName."' style='width:100%' />";
-        echo "</td>";
-        echo "<td style=' style='width:30%';text-align:center'>";
-            echo "<input type='submit' name='save' value='Save' />";
-            echo "<input type='submit' name='cancel' value='Cancel' />";
-        echo "</td>";
+        echo '<td style="width:100%" colspan=2>';
+
+        $form = Form::create('catform', '');
+        $form->addHiddenValue('categoryID', $this->categoryID);
+        $form->addHiddenValue('save', 'save');
+
+        $row = $form->addRow();
+            $row->addLabel('categoryName', __('Category Name'));
+            $row->addTextField('categoryName')->isRequired()->maxLength(45)->setValue($this->categoryName);
+
+        $row = $form->addRow();
+            $row->addLabel('categoryType', __('Type'));
+            $row->addSelect('categoryType')->fromArray(array('House', 'Student'))->selected($this->categoryType);
+
+        $row = $form->addRow();
+            $row->addLabel('categoryPresets', __('Presets'));
+            $row->addTextArea('categoryPresets')->setRows(2)->setValue($this->categoryPresets);
+
+        $row = $form->addRow();
+            $row->addSubmit(__('Save'));
+
+        echo $form->getOutput();
+
+        echo '</td>';
     }
     
     function mainform() {
@@ -51,7 +69,7 @@ class cat {
         
         echo "<p>&nbsp;</p>";
         echo "<p><a href='$linkNew'>Add new</a></p>";
-        echo "<form name='catform' method='post' action='' />";
+        // echo "<form name='catform' method='post' action='' />";
             echo "<table style='width:100%;'>";
                 echo "<thead>";
                     echo "<tr>";
@@ -64,6 +82,8 @@ class cat {
                     if ($this->categoryList->rowCount() == 0 || $this->mode == 'new') {
                         $this->categoryID = 0;
                         $this->categoryName = '';
+                        $this->categoryType = 'House';
+                        $this->categoryPresets = '';
                         $this->formDefine();
                     }
                     while ($row = $this->categoryList->fetch()) {
@@ -77,6 +97,8 @@ class cat {
                             if (($this->mode == 'edit' && $row['categoryID'] == $this->categoryID)) {
                                 $this->categoryID = $row['categoryID'];
                                 $this->categoryName = $row['categoryName'];
+                                $this->categoryType = $row['categoryType'];
+                                $this->categoryPresets = $row['categoryPresets'];
                                 $this->formDefine();
                             } else {
                                 echo "<td style='width:70%'>".$row['categoryName']."</td>";
@@ -89,7 +111,7 @@ class cat {
                     }
                 echo "</tbody>";
             echo "</table>";
-        echo "</form>";
+        // echo "</form>";
     }
     
     function categoryDelete() {
@@ -103,8 +125,10 @@ class cat {
     }
     
     function categorySave() {
-        $categoryID = $_POST['categoryID'];
-        $categoryName = trim($_POST['categoryName']);
+        $categoryID = isset($_POST['categoryID'])? $_POST['categoryID'] : '';
+        $categoryName = isset($_POST['categoryName'])? trim($_POST['categoryName']) : '';
+        $categoryType = isset($_POST['categoryType'])? $_POST['categoryType'] : '';
+        $categoryPresets = isset($_POST['categoryPresets'])? trim($_POST['categoryPresets']) : '';
         
         if ($categoryName === '') {
             return;
@@ -130,17 +154,21 @@ class cat {
             if ($categoryID > 0) {
                 $data = array(
                     'categoryID' => $categoryID,
-                    'categoryName' => $categoryName
+                    'categoryName' => $categoryName,
+                    'categoryType' => $categoryType,
+                    'categoryPresets' => $categoryPresets,
                 );
                 $sql = "UPDATE hpCategory
-                    SET categoryName = :categoryName
+                    SET categoryName = :categoryName, categoryType=:categoryType, categoryPresets=:categoryPresets
                     WHERE categoryID = :categoryID";
             } else {
                 $data = array(
-                    'categoryName' => $categoryName
+                    'categoryName' => $categoryName,
+                    'categoryType' => $categoryType,
+                    'categoryPresets' => $categoryPresets,
                 );
                 $sql = "INSERT INTO hpCategory
-                    SET categoryName = :categoryName";
+                    SET categoryName = :categoryName, categoryType=:categoryType, categoryPresets=:categoryPresets";
             }
             $rs = $this->dbh->prepare($sql);
             $rs->execute($data);

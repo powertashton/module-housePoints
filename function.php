@@ -17,12 +17,22 @@ function getMode() {
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-function readCategoryList($dbh) {
-    $sql = "SELECT *
-        FROM hpCategory
-        ORDER BY categoryOrder";
+function readCategoryList($dbh, $type = null) {
+    if (!empty($type)) {
+        $data = array('type' => $type);
+        $sql = "SELECT *
+            FROM hpCategory
+            WHERE categoryType=:type 
+            ORDER BY categoryOrder";
+    } else {
+        $data = array();
+        $sql = "SELECT *
+            FROM hpCategory
+            ORDER BY categoryOrder";
+    }
+    
     $rs = $dbh->prepare($sql);
-    $rs->execute();
+    $rs->execute($data);
     return $rs;
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +69,7 @@ function readStudentList($dbh, $yearID) {
         INNER JOIN gibbonHouse
         ON gibbonHouse.gibbonHouseID = gibbonPerson.gibbonHouseID
         WHERE gibbonStudentEnrolment.gibbonSchoolYearID = :yearID
-        ORDER BY gibbonPerson.officialName, gibbonPerson.preferredName";
+        ORDER BY gibbonPerson.surname, gibbonPerson.preferredName";
     $rs = $dbh->prepare($sql);
     $rs->execute($data);
     return $rs;
@@ -71,10 +81,7 @@ function selectStudent($studentList) {
     echo "<select name='studentID' id='studentID' style='float:left;'>";
         echo "<option value='0'>Please select</option>";
         while ($row = $studentList->fetch()) {
-            $studentName = $row['officialName'].', ('.$row['preferredName'].') ';
-            if ($studentName == '') {
-                $studentName = $row['surname'].', '.$row['preferredName'];
-            }
+            $studentName = $row['surname'].', '.$row['preferredName'];
             echo "<option value='".$row['studentID']."'>".$studentName.' ('.$row['className']." - ".$row['house'].")</option>";
         }
     echo "</select>";
