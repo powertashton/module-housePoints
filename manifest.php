@@ -23,7 +23,7 @@ $description="Module to allow allocating and display of house points" ;
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="Learn" ;
-$version="1.01" ;
+$version="1.02" ;
 $author="Andy Statham" ;
 $url="http://rapid36.com" ;
 
@@ -33,6 +33,8 @@ $moduleTables[0] = "
     categoryID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     categoryName VARCHAR(45) NOT NULL,
     categoryOrder TINYINT(4) UNSIGNED NOT NULL,
+    categoryType ENUM('House','Student') NOT NULL DEFAULT 'House',
+    categoryPresets TEXT NOT NULL,
     PRIMARY KEY (categoryID)
     );";
     
