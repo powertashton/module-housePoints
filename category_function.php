@@ -3,7 +3,7 @@ use Gibbon\Forms\Form;
 
 class cat {
     
-    function cat($guid, $connection2) {
+    function __construct($guid, $connection2) {
         $this->dbh = $connection2;
         $this->guid = $guid;
         

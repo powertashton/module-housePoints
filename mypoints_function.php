@@ -1,7 +1,7 @@
 <?php
 class mypt {
     
-    function mypt($guid, $connection2) {
+    function __construct($guid, $connection2) {
         $this->dbh = $connection2;
         $this->guid = $guid;
         
