@@ -27,7 +27,11 @@ class over {
                 
             while ($row = $this->pointsList->fetch()) {
                 echo "<tr>";
-                    echo "<td>".$row['houseName']."</td>";
+                    echo "<td>";
+                    if (!empty($row['houseLogo'])) {
+                        echo sprintf('<img src="%1$s" title="%2$s"><br/>', $_SESSION[$this->guid]['absoluteURL'].'/'.$row['houseLogo'], $row['houseName'] );
+                    }
+                    echo $row['houseName']."</td>";
                     echo "<td>".$row['total']."</td>";
                 echo "</tr>";
             }
@@ -40,6 +44,7 @@ class over {
         );
         $sql = "SELECT gibbonHouse.gibbonHouseID AS houseID,
             gibbonHouse.name AS houseName,
+            gibbonHouse.logo as houseLogo,
             COALESCE(pointStudent.total + pointHouse.total, pointStudent.total, pointHouse.total, 0) AS total
             FROM gibbonHouse
             LEFT JOIN 
