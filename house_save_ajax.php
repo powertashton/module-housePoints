@@ -1,20 +1,8 @@
 <?php
-include  "../../config.php";
-include "../../functions.php";
-
-//New PDO DB connection
-try {
-    $connection2=new PDO("mysql:host=$databaseServer;
-            dbname=$databaseName;
-            charset=utf8", $databaseUsername, $databasePassword);
-    $connection2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // reset coding
-}
-catch(PDOException $e) {
-    echo $e->getMessage();
-}
+include  "../../gibbon.php";
 
 $dbh = $connection2;
+$highestAction = getHighestGroupedAction($guid, '/modules/House Points/house.php', $dbh);
 
 $formData = array();
 parse_str($_POST['formData'], $formData);
@@ -33,8 +21,10 @@ if ($houseID == 0) {
 if ($categoryID == 0) {
     $msg .= "Please select a category<br />"; 
 }
-if ($points<1 || $points>200) {
-    $msg .= "Please award between 1 and 200 points<br />"; 
+if ($highestAction != 'Award house points_unlimited') {
+    if ($points<1 || $points>200) {
+        $msg .= "Please award between 1 and 200 points<br />"; 
+    }
 }
 
 if ($msg == '') {

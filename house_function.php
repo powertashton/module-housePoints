@@ -29,21 +29,27 @@ class pt {
             $row->addLabel('houseID', __('House'));
             $row->addSelect('houseID')->fromQuery($pdo, $sql)->isRequired()->placeholder();
 
-        $categories = array_reduce($this->categoryList->fetchAll(), function($group, $item) { 
+        $highestAction = getHighestGroupedAction($this->guid, '/modules/House Points/house.php', $this->dbh);
+        $unlimitedPoints = ($highestAction == 'Award house points_unlimited');
+
+        $categories = array_reduce($this->categoryList->fetchAll(), function($group, $item) use ($unlimitedPoints) { 
+            if (empty($item['categoryPresets']) && !$unlimitedPoints) return $group; 
+
             $group[$item['categoryID']] = $item['categoryName'];
             return $group;
         }, array());
+
         $row = $form->addRow();
             $row->addLabel('categoryID', __('Category'));
             $row->addSelect('categoryID')->fromArray($categories)->isRequired()->placeholder();
 
         $row = $form->addRow();
             $row->addLabel('points', __('Points'));
-            $row->addTextField('points');
+            $row->addTextField('points')->isDisabled()->placeholder(__('Select a category'));
 
         $row = $form->addRow();
             $row->addLabel('reason', __('Reason'));
-            $row->addTextArea('reason')->setRows(2);
+            $row->addTextArea('reason')->setRows(2)->isRequired();
             
         $row = $form->addRow();
             $row->addButton('Submit', 'houseSave()', 'submit')->addClass('right');
