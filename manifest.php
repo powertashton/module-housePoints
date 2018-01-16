@@ -19,11 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Basica variables
 $name="House Points" ;
-$description="Module to allow allocating and display of house points" ;
+$description="Module to allow allocating and display of house points (modified by SK)" ;
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="Learn" ;
-$version="1.02" ;
+$version="1.03" ;
 $author="Andy Statham" ;
 $url="http://rapid36.com" ;
 
@@ -68,7 +68,7 @@ $moduleTables[2] = "
 // for admin and SLT only
 $actionRows[0]["name"]="Categories" ;
 $actionRows[0]["precedence"]="1";
-$actionRows[0]["category"]="Learn" ;
+$actionRows[0]["category"]="Manage" ;
 $actionRows[0]["description"]="Manage category list" ;
 $actionRows[0]["URLList"]="category.php" ;
 $actionRows[0]["entryURL"]="category.php" ;
@@ -85,7 +85,7 @@ $actionRows[0]["categoryPermissionOther"]="N" ;
 
 $actionRows[1]["name"]="Award student points" ;
 $actionRows[1]["precedence"]="2";
-$actionRows[1]["category"]="Learn" ;
+$actionRows[1]["category"]="Award" ;
 $actionRows[1]["description"]="Award points to students" ;
 $actionRows[1]["URLList"]="award.php" ;
 $actionRows[1]["entryURL"]="award.php" ;
@@ -102,7 +102,7 @@ $actionRows[1]["categoryPermissionOther"]="N" ;
 
 $actionRows[2]["name"]="Award house points" ;
 $actionRows[2]["precedence"]="3";
-$actionRows[2]["category"]="Learn" ;
+$actionRows[2]["category"]="Award" ;
 $actionRows[2]["description"]="Award points to house" ;
 $actionRows[2]["URLList"]="house.php" ;
 $actionRows[2]["entryURL"]="house.php" ;
@@ -119,7 +119,7 @@ $actionRows[2]["categoryPermissionOther"]="N" ;
 
 $actionRows[3]["name"]="View points overall" ;
 $actionRows[3]["precedence"]="4";
-$actionRows[3]["category"]="Learn" ;
+$actionRows[3]["category"]="View" ;
 $actionRows[3]["description"]="View points for each house" ;
 $actionRows[3]["URLList"]="overall.php" ;
 $actionRows[3]["entryURL"]="overall.php" ;
@@ -136,7 +136,7 @@ $actionRows[3]["categoryPermissionOther"]="Y" ;
 
 $actionRows[4]["name"]="View points individual" ;
 $actionRows[4]["precedence"]="5";
-$actionRows[4]["category"]="Learn" ;
+$actionRows[4]["category"]="View" ;
 $actionRows[4]["description"]="Select individual student to view house points" ;
 $actionRows[4]["URLList"]="individual.php" ;
 $actionRows[4]["entryURL"]="individual.php" ;
@@ -153,7 +153,7 @@ $actionRows[4]["categoryPermissionOther"]="N" ;
 
 $actionRows[5]["name"]="View points class" ;
 $actionRows[5]["precedence"]="6";
-$actionRows[5]["category"]="Learn" ;
+$actionRows[5]["category"]="View" ;
 $actionRows[5]["description"]="View points for whole class" ;
 $actionRows[5]["URLList"]="classpoints.php" ;
 $actionRows[5]["entryURL"]="classpoints.php" ;
@@ -171,7 +171,7 @@ $actionRows[5]["categoryPermissionOther"]="N" ;
 // student's view
 $actionRows[6]["name"]="View my points" ;
 $actionRows[6]["precedence"]="7";
-$actionRows[6]["category"]="Learn" ;
+$actionRows[6]["category"]="View" ;
 $actionRows[6]["description"]="Student can see how many points they have" ;
 $actionRows[6]["URLList"]="mypoints.php" ;
 $actionRows[6]["entryURL"]="mypoints.php" ;
@@ -189,7 +189,7 @@ $actionRows[6]["categoryPermissionOther"]="N" ;
 // manage points
 $actionRows[7]["name"]="Manage points" ;
 $actionRows[7]["precedence"]="8";
-$actionRows[7]["category"]="Learn" ;
+$actionRows[7]["category"]="Manage" ;
 $actionRows[7]["description"]="modify points awarded" ;
 $actionRows[7]["URLList"]="manage.php" ;
 $actionRows[7]["entryURL"]="manage.php" ;
