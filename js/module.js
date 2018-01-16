@@ -243,14 +243,16 @@ function showClassPoint(classID) {
             var html = '';
             html += "<table style='width:100%;'>";
                 html += "<tr>";
-                    html += "<th style='width:50%;'>Name</th>";
-                    html += "<th style='width:30%;'>Points</th>";
+                    html += "<th style='width:40%;'>Name</th>";
+                    html += "<th style='width:25%;'>Points</th>";
+                    html += "<th style='width:15%;'>House</th>";
                 html += "</tr>";
                 $.each(points, function(i, pt) {
                     total = pt.total === null ? 0 : pt.total;
                     html += "<tr>";
-                        html += "<td>" + pt.officialName + "</td>";
+                        html += "<td>" + pt.surname + ", " + pt.preferredName + "</td>";
                         html += "<td>" + total + "</td>";
+                        html += "<td>" + pt.houseName + "</td>";
                     html += "</tr>";
                 });
             html += "</table>";

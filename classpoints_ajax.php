@@ -22,18 +22,18 @@ $data = array(
     'classID' => $classID,
     
 );
-$sql = "SELECT gibbonPerson.officialName, gibbonPerson.preferredName, SUM(hpPointStudent.points) AS total
+$sql = "SELECT gibbonPerson.officialName, gibbonPerson.surname, gibbonPerson.preferredName, gibbonHouse.name as houseName, SUM(hpPointStudent.points) AS total
     FROM gibbonPerson
     INNER JOIN gibbonStudentEnrolment
     ON gibbonStudentEnrolment.gibbonPersonID = gibbonPerson.gibbonPersonID
     LEFT JOIN hpPointStudent
     ON hpPointStudent.studentID = gibbonStudentEnrolment.gibbonPersonID
     AND hpPointStudent.yearID = gibbonStudentEnrolment.gibbonSchoolYearID
-    
+    JOIN gibbonHouse ON (gibbonHouse.gibbonHouseID=gibbonPerson.gibbonHouseID)
 
     WHERE gibbonStudentEnrolment.gibbonRollGroupID = :classID
     GROUP BY gibbonStudentEnrolment.gibbonPersonID
-    ORDER BY gibbonPerson.officialName, gibbonPerson.preferredName";
+    ORDER BY gibbonPerson.surname, gibbonPerson.preferredName";
 /*
 $sql = "SELECT gibbonPerson.officialName, gibbonPerson.preferredName, points.total
     FROM gibbonPerson

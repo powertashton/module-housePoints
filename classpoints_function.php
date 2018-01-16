@@ -16,11 +16,11 @@ class cls {
     function mainForm() {
         echo "<p>&nbsp;</p>";
         echo "<h3>View house points for a class</h3>";
-        echo "<table style='width:100%;'>";
+        echo "<table class='fullWidth'>";
             echo "<tr>";
                 echo "<th style='width:20%;'>Select class</div>";
                 echo "<td style='width:80%;'>";
-                    echo "<select id='classID' style='float:left;'>";
+                    echo "<select id='classID' style='float:left;' class='fullWidth'>";
                         echo "<option value='0'>Please select</option>";
                         while ($row = $this->classList->fetch()) {
                             echo "<option value='".$row['classID']."'>".$row['className']."</option>";
@@ -51,7 +51,7 @@ class cls {
             gibbonRollGroup.name AS className
             FROM gibbonRollGroup
             WHERE gibbonRollGroup.gibbonSchoolYearID = :yearID
-            ORDER BY gibbonRollGroup.name";
+            ORDER BY LENGTH(gibbonRollGroup.name), gibbonRollGroup.name";
         $rs = $this->dbh->prepare($sql);
         $rs->execute($data);
         return $rs;
