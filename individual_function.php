@@ -15,9 +15,9 @@ class ind {
     function mainForm() {
         echo "<p>&nbsp;</p>";
         echo "<h3>View house points for a student</h3>";
-        echo "<table>";
+        echo "<table class='fullWidth'>";
             echo "<tr>";
-                echo "<th>Select student</div>";
+                echo "<th style='width:20%;'>Select student</div>";
                 echo "<td>";
                     selectStudent($this->studentList);
                 echo "</td>";

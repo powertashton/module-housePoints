@@ -16,9 +16,9 @@ class man {
     function mainForm() {
         echo "<p>&nbsp;</p>";
         echo "<h3>Manage house points for a student</h3>";
-        echo "<table>";
+        echo "<table class='fullWidth'>";
             echo "<tr>";
-                echo "<th>Select student</div>";
+                echo "<th style='width: 20%'>Select student</div>";
                 echo "<td>";
                     selectStudent($this->studentList);
                 echo "</td>";
@@ -30,9 +30,9 @@ class man {
         echo "<div id='studentPoints'></div>";
         
         echo "<h3>Manage house points for house</h3>";
-        echo "<table>";
+        echo "<table class='fullWidth'>";
             echo "<tr>";
-                echo "<th>Select House</div>";
+                echo "<th style='width: 20%'>Select House</div>";
                 echo "<td>";
                     selectHouse($this->houseList);
                 echo "</td>";

@@ -69,6 +69,7 @@ function readStudentList($dbh, $yearID) {
         INNER JOIN gibbonHouse
         ON gibbonHouse.gibbonHouseID = gibbonPerson.gibbonHouseID
         WHERE gibbonStudentEnrolment.gibbonSchoolYearID = :yearID
+        AND gibbonPerson.status='Full'
         ORDER BY gibbonPerson.surname, gibbonPerson.preferredName";
     $rs = $dbh->prepare($sql);
     $rs->execute($data);
@@ -78,7 +79,7 @@ function readStudentList($dbh, $yearID) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function selectStudent($studentList) {
-    echo "<select name='studentID' id='studentID' style='float:left;'>";
+    echo "<select name='studentID' id='studentID' style='float:left;' class='fullWidth'>";
         echo "<option value='0'>Please select</option>";
         while ($row = $studentList->fetch()) {
             $studentName = $row['surname'].', '.$row['preferredName'];
@@ -90,7 +91,7 @@ function selectStudent($studentList) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function selectHouse($houseList) {
-    echo "<select name='houseID' id='houseID' style='float:left;'>";
+    echo "<select name='houseID' id='houseID' style='float:left;' class='fullWidth'>";
         echo "<option value='0'>Please select</option>";
         while ($row = $houseList->fetch()) {
             echo "<option value='".$row['houseID']."'>".$row['houseName']."</option>";
