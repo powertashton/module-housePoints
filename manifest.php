@@ -23,7 +23,7 @@ $description="Module to allow allocating and display of house points (modified b
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="Learn" ;
-$version="1.03" ;
+$version="1.3.01" ;
 $author="Andy Statham" ;
 $url="http://rapid36.com" ;
 
@@ -203,6 +203,41 @@ $actionRows[7]["categoryPermissionStaff"]="Y" ;
 $actionRows[7]["categoryPermissionStudent"]="N" ;
 $actionRows[7]["categoryPermissionParent"]="N" ;
 $actionRows[7]["categoryPermissionOther"]="N" ;
+
+
+$actionRows[]["name"]="Award student points_unlimited" ;
+$actionRows[]["precedence"]="0";
+$actionRows[]["category"]="Award" ;
+$actionRows[]["description"]="Award points to students, without a limit" ;
+$actionRows[]["URLList"]="award.php" ;
+$actionRows[]["entryURL"]="award.php" ;
+$actionRows[]["defaultPermissionAdmin"]="Y" ;
+$actionRows[]["defaultPermissionTeacher"]="N" ;
+$actionRows[]["defaultPermissionStudent"]="N" ;
+$actionRows[]["defaultPermissionParent"]="N" ;
+$actionRows[]["defaultPermissionPublic"]="N" ;
+$actionRows[]["defaultPermissionSupport"]="N" ;
+$actionRows[]["categoryPermissionStaff"]="Y" ;
+$actionRows[]["categoryPermissionStudent"]="N" ;
+$actionRows[]["categoryPermissionParent"]="N" ;
+$actionRows[]["categoryPermissionOther"]="N" ;
+
+$actionRows[]["name"]="Award house points_unlimited" ;
+$actionRows[]["precedence"]="0";
+$actionRows[]["category"]="Award" ;
+$actionRows[]["description"]="Award points to house, without a limit" ;
+$actionRows[]["URLList"]="house.php" ;
+$actionRows[]["entryURL"]="house.php" ;
+$actionRows[]["defaultPermissionAdmin"]="Y" ;
+$actionRows[]["defaultPermissionTeacher"]="N" ;
+$actionRows[]["defaultPermissionStudent"]="N" ;
+$actionRows[]["defaultPermissionParent"]="N" ;
+$actionRows[]["defaultPermissionPublic"]="N" ;
+$actionRows[]["defaultPermissionSupport"]="N" ;
+$actionRows[]["categoryPermissionStaff"]="Y" ;
+$actionRows[]["categoryPermissionStudent"]="N" ;
+$actionRows[]["categoryPermissionParent"]="N" ;
+$actionRows[]["categoryPermissionOther"]="N" ;
 
 $array = array();
 $array['sourceModuleName'] = $name;

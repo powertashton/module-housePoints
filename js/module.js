@@ -282,7 +282,7 @@ function updateCategoryPoints() {
                 });
                 parent.append(points);
             } else {
-                var points = $('<input type="text" id="points" name="points" value="1" class="standardWidth" min="1" max="200" />');
+                var points = $('<input type="text" id="points" name="points" value="1" class="standardWidth" maxlength="4" />');
                 parent.append(points);
             }
         }
