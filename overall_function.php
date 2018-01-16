@@ -21,17 +21,19 @@ class over {
         
         echo "<table style='width:100%;font-size:14pt'>";
             echo "<tr>";
-                echo "<th style='width:40%'>House</th>";
-                echo "<th style='width:40%'>Points</th>";
+                echo "<th style='width:15%'>Crest</th>";
+                echo "<th style='width:35%'>House</th>";
+                echo "<th style='width:30%'>Points</th>";
             echo "</tr>";
                 
             while ($row = $this->pointsList->fetch()) {
                 echo "<tr>";
-                    echo "<td>";
+                    echo "<td class='textCenter'>";
                     if (!empty($row['houseLogo'])) {
-                        echo sprintf('<img src="%1$s" title="%2$s"><br/>', $_SESSION[$this->guid]['absoluteURL'].'/'.$row['houseLogo'], $row['houseName'] );
+                        echo sprintf('<img src="%1$s" title="%2$s" style="width:auto;height:80px;">', $_SESSION[$this->guid]['absoluteURL'].'/'.$row['houseLogo'], $row['houseName'] );
                     }
-                    echo $row['houseName']."</td>";
+                    echo "</td>";
+                    echo "<td>".$row['houseName']."</td>";
                     echo "<td>".$row['total']."</td>";
                 echo "</tr>";
             }
