@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //Basica variables
 $name="House Points" ;
 $description="Module to allow allocating and display of house points (modified by SK)" ;
-$entryURL="index.php" ;
+$entryURL="overall.php" ;
 $type="Additional" ;
 $category="Learn" ;
 $version="1.3.01" ;
