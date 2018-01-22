@@ -21,6 +21,9 @@ if ($studentID == 0) {
 if ($categoryID == 0) {
     $msg .= "Please select a category<br />"; 
 }
+if (empty($reason)) {
+    $msg .= "Please provide a detailed reason<br />"; 
+}
 if ($highestAction != 'Award student points_unlimited') {
     if ($points<1 || $points>20) {
         $msg .= "Please award between 1 and 20 points<br />"; 
