@@ -43,7 +43,7 @@ $moduleTables[1] = "
     hpID INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     studentID int(10) unsigned NOT NULL,
     categoryID int(10) unsigned NOT NULL,
-    points tinyint(4) unsigned NOT NULL,
+    points INT(4) unsigned NOT NULL,
     reason varchar(255) NOT NULL,
     yearID int(10) unsigned NOT NULL,
     awardedDate datetime NOT NULL,
@@ -56,7 +56,7 @@ $moduleTables[2] = "
     hpID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     houseID INT(10) UNSIGNED NOT NULL,
     categoryID INT(10) UNSIGNED NOT NULL,
-    points TINYINT(4) UNSIGNED NOT NULL,
+    points INT(4) UNSIGNED NOT NULL,
     reason VARCHAR(255) NULL,
     yearID INT(10) UNSIGNED NOT NULL,
     awardedDate DATETIME NOT NULL,
@@ -84,7 +84,7 @@ $actionRows[0]["categoryPermissionParent"]="N" ;
 $actionRows[0]["categoryPermissionOther"]="N" ;
 
 $actionRows[1]["name"]="Award student points" ;
-$actionRows[1]["precedence"]="2";
+$actionRows[1]["precedence"]="1";
 $actionRows[1]["category"]="Award" ;
 $actionRows[1]["description"]="Award points to students" ;
 $actionRows[1]["URLList"]="award.php" ;
@@ -101,7 +101,7 @@ $actionRows[1]["categoryPermissionParent"]="N" ;
 $actionRows[1]["categoryPermissionOther"]="N" ;
 
 $actionRows[2]["name"]="Award house points" ;
-$actionRows[2]["precedence"]="3";
+$actionRows[2]["precedence"]="1";
 $actionRows[2]["category"]="Award" ;
 $actionRows[2]["description"]="Award points to house" ;
 $actionRows[2]["URLList"]="house.php" ;
@@ -205,39 +205,44 @@ $actionRows[7]["categoryPermissionParent"]="N" ;
 $actionRows[7]["categoryPermissionOther"]="N" ;
 
 
-$actionRows[]["name"]="Award student points_unlimited" ;
-$actionRows[]["precedence"]="0";
-$actionRows[]["category"]="Award" ;
-$actionRows[]["description"]="Award points to students, without a limit" ;
-$actionRows[]["URLList"]="award.php" ;
-$actionRows[]["entryURL"]="award.php" ;
-$actionRows[]["defaultPermissionAdmin"]="Y" ;
-$actionRows[]["defaultPermissionTeacher"]="N" ;
-$actionRows[]["defaultPermissionStudent"]="N" ;
-$actionRows[]["defaultPermissionParent"]="N" ;
-$actionRows[]["defaultPermissionPublic"]="N" ;
-$actionRows[]["defaultPermissionSupport"]="N" ;
-$actionRows[]["categoryPermissionStaff"]="Y" ;
-$actionRows[]["categoryPermissionStudent"]="N" ;
-$actionRows[]["categoryPermissionParent"]="N" ;
-$actionRows[]["categoryPermissionOther"]="N" ;
+$actionRows[8]["name"]="Award student points_unlimited" ;
+$actionRows[8]["precedence"]="2";
+$actionRows[8]["category"]="Award" ;
+$actionRows[8]["description"]="Award points to students, without a limit" ;
+$actionRows[8]["URLList"]="award.php" ;
+$actionRows[8]["entryURL"]="award.php" ;
+$actionRows[8]["defaultPermissionAdmin"]="Y" ;
+$actionRows[8]["defaultPermissionTeacher"]="N" ;
+$actionRows[8]["defaultPermissionStudent"]="N" ;
+$actionRows[8]["defaultPermissionParent"]="N" ;
+$actionRows[8]["defaultPermissionPublic"]="N" ;
+$actionRows[8]["defaultPermissionSupport"]="N" ;
+$actionRows[8]["categoryPermissionStaff"]="Y" ;
+$actionRows[8]["categoryPermissionStudent"]="N" ;
+$actionRows[8]["categoryPermissionParent"]="N" ;
+$actionRows[8]["categoryPermissionOther"]="N" ;
 
-$actionRows[]["name"]="Award house points_unlimited" ;
-$actionRows[]["precedence"]="0";
-$actionRows[]["category"]="Award" ;
-$actionRows[]["description"]="Award points to house, without a limit" ;
-$actionRows[]["URLList"]="house.php" ;
-$actionRows[]["entryURL"]="house.php" ;
-$actionRows[]["defaultPermissionAdmin"]="Y" ;
-$actionRows[]["defaultPermissionTeacher"]="N" ;
-$actionRows[]["defaultPermissionStudent"]="N" ;
-$actionRows[]["defaultPermissionParent"]="N" ;
-$actionRows[]["defaultPermissionPublic"]="N" ;
-$actionRows[]["defaultPermissionSupport"]="N" ;
-$actionRows[]["categoryPermissionStaff"]="Y" ;
-$actionRows[]["categoryPermissionStudent"]="N" ;
-$actionRows[]["categoryPermissionParent"]="N" ;
-$actionRows[]["categoryPermissionOther"]="N" ;
+$actionRows[9]["name"]="Award house points_unlimited" ;
+$actionRows[9]["precedence"]="2";
+$actionRows[9]["category"]="Award" ;
+$actionRows[9]["description"]="Award points to house, without a limit" ;
+$actionRows[9]["URLList"]="house.php" ;
+$actionRows[9]["entryURL"]="house.php" ;
+$actionRows[9]["defaultPermissionAdmin"]="Y" ;
+$actionRows[9]["defaultPermissionTeacher"]="N" ;
+$actionRows[9]["defaultPermissionStudent"]="N" ;
+$actionRows[9]["defaultPermissionParent"]="N" ;
+$actionRows[9]["defaultPermissionPublic"]="N" ;
+$actionRows[9]["defaultPermissionSupport"]="N" ;
+$actionRows[9]["categoryPermissionStaff"]="Y" ;
+$actionRows[9]["categoryPermissionStudent"]="N" ;
+$actionRows[9]["categoryPermissionParent"]="N" ;
+$actionRows[9]["categoryPermissionOther"]="N" ;
+
+// Add some default categories
+$gibbonSetting[0]="INSERT INTO `hpCategory` (`categoryID`, `categoryName`, `categoryOrder`, `categoryType`, `categoryPresets`) VALUES ('0', '-- Unlimited House Points --', '0', 'House', '')";
+$gibbonSetting[1]="INSERT INTO `hpCategory` (`categoryID`, `categoryName`, `categoryOrder`, `categoryType`, `categoryPresets`) VALUES ('0', '-- Unlimited Student Points --', '0', 'Student', '')";
+
 
 $array = array();
 $array['sourceModuleName'] = $name;
