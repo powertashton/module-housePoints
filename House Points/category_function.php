@@ -50,7 +50,9 @@ class cat {
             $row->addSelect('categoryType')->fromArray(array('House', 'Student'))->selected($this->categoryType);
 
         $row = $form->addRow();
-            $row->addLabel('categoryPresets', __('Presets'));
+            $row->addLabel('categoryPresets', __('Presets'))
+                ->description(__('Add preset comma-separated increments as Name: PointValue. Leave blank for unlimited.'))
+                ->description(__(' eg: ThingOne: 1, ThingTwo: 5, ThingThree: 10'));
             $row->addTextArea('categoryPresets')->setRows(2)->setValue($this->categoryPresets);
 
         $row = $form->addRow();
