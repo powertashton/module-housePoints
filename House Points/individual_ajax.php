@@ -1,18 +1,5 @@
 <?php
-include  "../../config.php";
-include "../../functions.php";
-
-//New PDO DB connection
-try {
-    $connection2=new PDO("mysql:host=$databaseServer;
-            dbname=$databaseName;
-            charset=utf8", $databaseUsername, $databasePassword);
-    $connection2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // reset coding
-}
-catch(PDOException $e) {
-    echo $e->getMessage();
-}
+include  '../../gibbon.php';
 
 $dbh = $connection2;
 
