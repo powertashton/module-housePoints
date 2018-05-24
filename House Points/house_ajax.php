@@ -22,7 +22,7 @@ $sql = "SELECT hpPointHouse.hpID,
     ON gibbonPerson.gibbonPersonID = hpPointHouse.awardedBy
     WHERE hpPointHouse.houseID = :houseID
     AND hpPointHouse.yearID = :yearID
-    ORDER BY awardedDate DESC";
+    ORDER BY hpPointHouse.awardedDate DESC";
 $rs = $dbh->prepare($sql);
 $rs->execute($data);
 $points = $rs->fetchAll();
