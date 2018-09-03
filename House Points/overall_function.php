@@ -56,6 +56,7 @@ class over {
                 FROM hpPointStudent
                 INNER JOIN gibbonPerson
                 ON hpPointStudent.studentID = gibbonPerson.gibbonPersonID
+                WHERE hpPointStudent.yearID=:yearID
                 GROUP BY gibbonPerson.gibbonHouseID
 
             ) AS pointStudent
@@ -65,10 +66,10 @@ class over {
                 SELECT hpPointHouse.houseID,
                 SUM(hpPointHouse.points) AS total
                 FROM hpPointHouse
+                WHERE hpPointHouse.yearID=:yearID
                 GROUP BY hpPointHouse.houseID
             ) AS pointHouse
             ON pointHouse.houseID = gibbonHouse.gibbonHouseID
-
             ORDER BY total DESC";
         $rs = $this->dbh->prepare($sql);
         $rs->execute($data);

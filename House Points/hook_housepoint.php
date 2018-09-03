@@ -69,6 +69,7 @@ function readPointsList($dbh, $yearID) {
             FROM hpPointStudent
             INNER JOIN gibbonPerson
             ON hpPointStudent.studentID = gibbonPerson.gibbonPersonID
+            WHERE hpPointStudent.yearID=:yearID
             GROUP BY gibbonPerson.gibbonHouseID
 
         ) AS pointStudent
@@ -78,6 +79,7 @@ function readPointsList($dbh, $yearID) {
             SELECT hpPointHouse.houseID,
             SUM(hpPointHouse.points) AS total
             FROM hpPointHouse
+            WHERE hpPointHouse.yearID=:yearID
             GROUP BY hpPointHouse.houseID
         ) AS pointHouse
         ON pointHouse.houseID = gibbonHouse.gibbonHouseID
