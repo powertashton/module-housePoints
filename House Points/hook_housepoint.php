@@ -14,14 +14,20 @@ if (isActionAccessible($guid, $connection2, '/modules/House Points/overall.php')
     $hook = "";
     $hook .= "<p>&nbsp;</p>";
     $hook .= "<h3>Overall House Points</h3>";
-    $hook .= "<table style='width:100%;font-size:8pt'>";
+    $hook .= "<table style='width:100%;font-size:14pt'>";
         $hook .= "<tr>";
-            $hook .= "<th style='width:40%'>House</th>";
-            $hook .= "<th style='width:40%'>Points</th>";
+            $hook .= "<th style='width:15%'>Crest</th>";
+            $hook .= "<th style='width:35%'>House</th>";
+            $hook .= "<th style='width:30%'>Points</th>";
         $hook .= "</tr>";
 
         while ($row = $pointsList->fetch()) {
             $hook .= "<tr>";
+                $hook .= "<td class='textCenter'>";
+                if (!empty($row['houseLogo'])) {
+                    $hook .= sprintf('<img src="%1$s" title="%2$s" style="width:auto;height:80px;">', $_SESSION[$guid]['absoluteURL'].'/'.$row['houseLogo'], $row['houseName'] );
+                }
+                $hook .= "</td>";
                 $hook .= "<td>".$row['houseName']."</td>";
                 $hook .= "<td>".$row['total']."</td>";
             $hook .= "</tr>";
@@ -60,6 +66,7 @@ function readPointsList($dbh, $yearID) {
     );
     $sql = "SELECT gibbonHouse.gibbonHouseID AS houseID,
         gibbonHouse.name AS houseName,
+        gibbonHouse.logo as houseLogo,
         COALESCE(pointStudent.total + pointHouse.total, pointStudent.total, pointHouse.total, 0) AS total
         FROM gibbonHouse
         LEFT JOIN 
