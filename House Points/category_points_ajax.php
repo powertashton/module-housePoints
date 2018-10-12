@@ -24,7 +24,7 @@ if (!$result || $result->rowCount() == 0) {
     foreach ($presetGroups as $index => $preset) {
         $presetValues = array_map('trim', explode(':', $preset));
         list($name, $points) = array_pad($presetValues, 2, false);
-        $presets[$points.chr(($index+65))] = $name.': '.$points.' points';
+        $presets[$points.chr(($index+65))] = ($name != $points)? $name.': '.$points.' points' : $points.' points';
     }
 
     die(json_encode($presets));
