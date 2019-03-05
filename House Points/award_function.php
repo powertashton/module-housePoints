@@ -32,7 +32,7 @@ class pt {
         }, array());
         $row = $form->addRow();
             $row->addLabel('studentID', __('Student'));
-            $row->addSelect('studentID')->fromArray($students)->isRequired()->placeholder();
+            $row->addSelect('studentID')->fromArray($students)->required()->placeholder();
 
         $highestAction = getHighestGroupedAction($this->guid, '/modules/House Points/award.php', $this->dbh);
         $unlimitedPoints = ($highestAction == 'Award student points_unlimited');
@@ -46,15 +46,15 @@ class pt {
 
         $row = $form->addRow();
             $row->addLabel('categoryID', __('Category'));
-            $row->addSelect('categoryID')->fromArray($categories)->isRequired()->placeholder();
+            $row->addSelect('categoryID')->fromArray($categories)->required()->placeholder();
 
         $row = $form->addRow();
             $row->addLabel('points', __('Points'));
-            $row->addTextField('points')->isDisabled()->placeholder(__('Select a category'));
+            $row->addTextField('points')->disabled()->placeholder(__('Select a category'));
 
         $row = $form->addRow();
             $row->addLabel('reason', __('Reason'));
-            $row->addTextArea('reason')->setRows(2)->isRequired();
+            $row->addTextArea('reason')->setRows(2)->required();
             
         $row = $form->addRow();
             $row->addButton('Submit', 'awardSave()', 'submit')->addClass('right');

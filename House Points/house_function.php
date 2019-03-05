@@ -27,7 +27,7 @@ class pt {
         $sql = "SELECT gibbonHouse.gibbonHouseID AS value, gibbonHouse.name FROM gibbonHouse ORDER BY gibbonHouse.name";
         $row = $form->addRow();
             $row->addLabel('houseID', __('House'));
-            $row->addSelect('houseID')->fromQuery($pdo, $sql)->isRequired()->placeholder();
+            $row->addSelect('houseID')->fromQuery($pdo, $sql)->required()->placeholder();
 
         $highestAction = getHighestGroupedAction($this->guid, '/modules/House Points/house.php', $this->dbh);
         $unlimitedPoints = ($highestAction == 'Award house points_unlimited');
@@ -41,15 +41,15 @@ class pt {
 
         $row = $form->addRow();
             $row->addLabel('categoryID', __('Category'));
-            $row->addSelect('categoryID')->fromArray($categories)->isRequired()->placeholder();
+            $row->addSelect('categoryID')->fromArray($categories)->required()->placeholder();
 
         $row = $form->addRow();
             $row->addLabel('points', __('Points'));
-            $row->addTextField('points')->isDisabled()->placeholder(__('Select a category'));
+            $row->addTextField('points')->disabled()->placeholder(__('Select a category'));
 
         $row = $form->addRow();
             $row->addLabel('reason', __('Reason'));
-            $row->addTextArea('reason')->setRows(2)->isRequired();
+            $row->addTextArea('reason')->setRows(2)->required();
             
         $row = $form->addRow();
             $row->addButton('Submit', 'houseSave()', 'submit')->addClass('right');

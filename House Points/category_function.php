@@ -43,7 +43,7 @@ class cat {
 
         $row = $form->addRow();
             $row->addLabel('categoryName', __('Category Name'));
-            $row->addTextField('categoryName')->isRequired()->maxLength(45)->setValue($this->categoryName);
+            $row->addTextField('categoryName')->required()->maxLength(45)->setValue($this->categoryName);
 
         $row = $form->addRow();
             $row->addLabel('categoryType', __('Type'));
