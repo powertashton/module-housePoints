@@ -7,6 +7,8 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/individual.php
     print "</div>" ;
 } else {
     
+    $page->breadcrumbs->add(__('View points individual'));
+
     $modpath =  "./modules/".$_SESSION[$guid]["module"];
     include $modpath."/function.php";
     include $modpath."/individual_function.php";

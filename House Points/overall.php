@@ -7,6 +7,8 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/overall.php")=
     print "</div>" ;
 } else {
     
+    $page->breadcrumbs->add(__('View points overall'));
+
     $modpath =  "./modules/".$_SESSION[$guid]["module"];
     include $modpath."/function.php";
     include $modpath."/overall_function.php";

@@ -7,6 +7,8 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/classpoints.ph
     print "</div>" ;
 } else {
     
+    $page->breadcrumbs->add(__('View points class'));
+
     $modpath =  "./modules/".$_SESSION[$guid]["module"];
     include $modpath."/function.php";
     include $modpath."/classpoints_function.php";

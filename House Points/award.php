@@ -6,6 +6,8 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/award.php")==F
             print "You do not have access to this action." ;
     print "</div>" ;
 } else {
+
+    $page->breadcrumbs->add(__('Award student points'));
     
     $modpath =  "./modules/".$_SESSION[$guid]["module"];
     include $modpath."/function.php";

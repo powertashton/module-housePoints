@@ -7,6 +7,8 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/mypoints.php")
     print "</div>" ;
 } else {
     
+    $page->breadcrumbs->add(__('My points'));
+
     $modpath =  "./modules/".$_SESSION[$guid]["module"];
     include $modpath."/function.php";
     include $modpath."/mypoints_function.php";
