@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+## v1.3.03
+- Updated permissions to allow student roles to potentially manage points
+
 ## v1.3.02
 - Updated house point totals to reset with each school year
 - Added house logos to the dashboard tab
