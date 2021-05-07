@@ -47,11 +47,11 @@ class cls {
         $data = array(
             'yearID' => $this->yearID
         );
-        $sql = "SELECT gibbonRollGroup.gibbonRollGroupID AS classID,
-            gibbonRollGroup.name AS className
-            FROM gibbonRollGroup
-            WHERE gibbonRollGroup.gibbonSchoolYearID = :yearID
-            ORDER BY LENGTH(gibbonRollGroup.name), gibbonRollGroup.name";
+        $sql = "SELECT gibbonFormGroup.gibbonFormGroupID AS classID,
+            gibbonFormGroup.name AS className
+            FROM gibbonFormGroup
+            WHERE gibbonFormGroup.gibbonSchoolYearID = :yearID
+            ORDER BY LENGTH(gibbonFormGroup.name), gibbonFormGroup.name";
         $rs = $this->dbh->prepare($sql);
         $rs->execute($data);
         return $rs;

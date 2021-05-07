@@ -58,14 +58,14 @@ function readStudentList($dbh, $yearID) {
         gibbonPerson.officialName,
         gibbonPerson.surname,
         gibbonPerson.preferredName,
-        gibbonRollGroup.name AS className,
+        gibbonFormGroup.name AS className,
         gibbonHouse.gibbonHouseID AS houseID,
         gibbonHouse.name AS house
         FROM gibbonPerson
         INNER JOIN gibbonStudentEnrolment
         ON gibbonStudentEnrolment.gibbonPersonID = gibbonPerson.gibbonPersonID
-        INNER JOIN gibbonRollGroup
-        ON gibbonRollGroup.gibbonRollGroupID = gibbonStudentEnrolment.gibbonRollGroupID
+        INNER JOIN gibbonFormGroup
+        ON gibbonFormGroup.gibbonFormGroupID = gibbonStudentEnrolment.gibbonFormGroupID
         INNER JOIN gibbonHouse
         ON gibbonHouse.gibbonHouseID = gibbonPerson.gibbonHouseID
         WHERE gibbonStudentEnrolment.gibbonSchoolYearID = :yearID

@@ -43,3 +43,7 @@ $count++;
 $sql[$count][0]="1.3.02" ; // version number
 $sql[$count][1]="" ;
 $count++;
+
+$sql[$count][0]="1.4.00" ; // version number
+$sql[$count][1]="" ;
+$count++;

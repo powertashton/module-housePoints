@@ -1,5 +1,7 @@
 CHANGELOG
 =========
+## v1.4.00
+- Form Group Terminology
 
 ## v1.3.02
 - Updated house point totals to reset with each school year
