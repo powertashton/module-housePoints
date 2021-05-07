@@ -48,3 +48,7 @@ $sql[$count][0]="1.3.03" ; // version number
 $sql[$count][1]="
 UPDATE gibbonAction JOIN gibbonModule ON (gibbonModule.gibbonModuleID=gibbonAction.gibbonModuleID) SET gibbonAction.categoryPermissionStudent='Y' WHERE gibbonModule.name = 'House Points';end" ;
 $count++;
+
+$sql[$count][0]="1.4.00" ; // version number
+$sql[$count][1]="" ;
+$count++;

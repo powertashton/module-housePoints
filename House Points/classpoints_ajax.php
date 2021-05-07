@@ -18,7 +18,7 @@ $sql = "SELECT gibbonPerson.officialName, gibbonPerson.surname, gibbonPerson.pre
     AND hpPointStudent.yearID = gibbonStudentEnrolment.gibbonSchoolYearID
     JOIN gibbonHouse ON (gibbonHouse.gibbonHouseID=gibbonPerson.gibbonHouseID)
 
-    WHERE gibbonStudentEnrolment.gibbonRollGroupID = :classID
+    WHERE gibbonStudentEnrolment.gibbonFormGroupID = :classID
     GROUP BY gibbonStudentEnrolment.gibbonPersonID
     ORDER BY gibbonPerson.surname, gibbonPerson.preferredName";
 /*
@@ -34,7 +34,7 @@ $sql = "SELECT gibbonPerson.officialName, gibbonPerson.preferredName, points.tot
     ) AS points
     ON points.studentID = gibbonStudentEnrolment.gibbonPersonID
 
-    WHERE gibbonStudentEnrolment.gibbonRollGroupID = :classID
+    WHERE gibbonStudentEnrolment.gibbonFormGroupID = :classID
     ORDER BY gibbonPerson.officialName, gibbonPerson.preferredName";
  * 
  */

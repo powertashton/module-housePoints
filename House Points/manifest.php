@@ -23,7 +23,7 @@ $description="Module to allow allocating and display of house points (modified b
 $entryURL="overall.php" ;
 $type="Additional" ;
 $category="Learn" ;
-$version="1.3.03" ;
+$version="1.4.00" ;
 $author="Andy Statham" ;
 $url="http://rapid36.com" ;
 
@@ -37,7 +37,7 @@ $moduleTables[0] = "
     categoryPresets TEXT NOT NULL,
     PRIMARY KEY (categoryID)
     );";
-    
+
 $moduleTables[1] = "
     CREATE TABLE hpPointStudent (
     hpID INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -50,7 +50,7 @@ $moduleTables[1] = "
     awardedBy int(10) unsigned NOT NULL,
     PRIMARY KEY (hpID)
     );";
-   
+
 $moduleTables[2] = "
     CREATE TABLE hpPointHouse (
     hpID INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -250,24 +250,24 @@ $array['sourceModuleAction'] = 'View points overall';
 $array['sourceModuleInclude'] = 'hook_housepoint.php';
 $hooks[0] = "
 INSERT INTO gibbonHook
-(gibbonHookID, name, type, options, gibbonModuleID) 
-VALUES 
+(gibbonHookID, name, type, options, gibbonModuleID)
+VALUES
 (
-    NULL, 
-    'House Points', 
-    'Staff Dashboard', 
+    NULL,
+    'House Points',
+    'Staff Dashboard',
     '".serialize($array)."', (SELECT gibbonModuleID FROM gibbonModule WHERE name='$name')
 );
 (
-    NULL, 
-    'House Points', 
-    'Student Dashboard', 
+    NULL,
+    'House Points',
+    'Student Dashboard',
     '".serialize($array)."', (SELECT gibbonModuleID FROM gibbonModule WHERE name='$name')
 );
 (
-    NULL, 
-    'House Points', 
-    'Parental Dashboard', 
+    NULL,
+    'House Points',
+    'Parental Dashboard',
     '".serialize($array)."', (SELECT gibbonModuleID FROM gibbonModule WHERE name='$name')
 );
 ";
