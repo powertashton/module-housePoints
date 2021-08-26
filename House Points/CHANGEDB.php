@@ -52,3 +52,10 @@ $count++;
 $sql[$count][0]="1.4.00" ; // version number
 $sql[$count][1]="" ;
 $count++;
+
+$sql[$count][0]="1.4.01" ; // version number
+$sql[$count][1]="
+INSERT INTO `gibbonHook` (`gibbonHookID`, `name`, `type`, `options`, `gibbonModuleID`) VALUES (NULL, 'House Points', 'Student Dashboard', 'a:3:{s:16:\"sourceModuleName\";s:12:\"House Points\";s:18:\"sourceModuleAction\";s:19:\"View points overall\";s:19:\"sourceModuleInclude\";s:19:\"hook_housepoint.php\";}', (SELECT gibbonModuleID FROM gibbonModule WHERE name='House Points'));end
+INSERT INTO `gibbonHook` (`gibbonHookID`, `name`, `type`, `options`, `gibbonModuleID`) VALUES (NULL, 'House Points', 'Parental Dashboard', 'a:3:{s:16:\"sourceModuleName\";s:12:\"House Points\";s:18:\"sourceModuleAction\";s:19:\"View points overall\";s:19:\"sourceModuleInclude\";s:19:\"hook_housepoint.php\";}', (SELECT gibbonModuleID FROM gibbonModule WHERE name='House Points'));end
+" ;
+$count++;

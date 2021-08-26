@@ -23,7 +23,7 @@ $description="Module to allow allocating and display of house points (modified b
 $entryURL="overall.php" ;
 $type="Additional" ;
 $category="Learn" ;
-$version="1.4.00" ;
+$version="1.4.01" ;
 $author="Andy Statham" ;
 $url="http://rapid36.com" ;
 
@@ -257,13 +257,13 @@ VALUES
     'House Points',
     'Staff Dashboard',
     '".serialize($array)."', (SELECT gibbonModuleID FROM gibbonModule WHERE name='$name')
-);
+),
 (
     NULL,
     'House Points',
     'Student Dashboard',
     '".serialize($array)."', (SELECT gibbonModuleID FROM gibbonModule WHERE name='$name')
-);
+),
 (
     NULL,
     'House Points',
