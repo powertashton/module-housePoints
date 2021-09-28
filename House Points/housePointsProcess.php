@@ -29,9 +29,9 @@ if (!$session->has('gibbonPersonID') || !$session->has('gibbonRoleIDPrimary')
     $houseID = $_POST['houseID'] ?? null;
     $categoryID = $_POST['categoryID'] ?? null;
     $points = $_POST['points'] ?? null;
-    $reason = $_POST['points'] ?? null;
+    $reason = $_POST['reason'] ?? null;
     $yearID = $_POST['yearID'] ?? null;
-    $teacherID = $_POST['yearID'] ?? null;
+    $teacherID = $_POST['teacherID'] ?? null;
 
     if (($houseID || $categoryID || $points || $reason || $yearID || $teacherID) != NULL) {
         $data = [
@@ -61,8 +61,6 @@ if (!$session->has('gibbonPersonID') || !$session->has('gibbonRoleIDPrimary')
             header("Location: {$URL}");
             exit();
     }
-    
-    
   
 }
 

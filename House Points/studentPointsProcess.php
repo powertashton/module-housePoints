@@ -29,9 +29,9 @@ if (!$session->has('gibbonPersonID') || !$session->has('gibbonRoleIDPrimary')
     $studentID = $_POST['studentID'] ?? null;
     $categoryID = $_POST['categoryID'] ?? null;
     $points = $_POST['points'] ?? null;
-    $reason = $_POST['points'] ?? null;
+    $reason = $_POST['reason'] ?? null;
     $yearID = $_POST['yearID'] ?? null;
-    $teacherID = $_POST['yearID'] ?? null;
+    $teacherID = $_POST['teacherID'] ?? null;
 
     if (($studentID || $categoryID || $points || $reason || $yearID || $teacherID) != NULL) {
         $data = [
