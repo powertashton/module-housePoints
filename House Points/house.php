@@ -31,8 +31,9 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/house.php")==F
     echo "<p>&nbsp;</p>";
         echo "<h3>Award house points to house</h3>";
 
-        $form = Form::create('awardForm', '');
-        $form->addHiddenValue('submit', 'submit');
+        $form = Form::create('awardForm', $session->get('absoluteURL') . '/modules/' . $session->get('module') . '/housePointsProcess.php', 'post');
+        $form->addHiddenValue('address', $session->get('address'));
+        $form->addHiddenValue('yearID', $session->get('gibbonSchoolYearID'));
         $form->addHiddenValue('teacherID', $session->get('gibbonPersonID'));
 
         $sql = "SELECT gibbonHouse.gibbonHouseID AS value, gibbonHouse.name FROM gibbonHouse ORDER BY gibbonHouse.name";
@@ -64,8 +65,9 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/house.php")==F
             $row->addLabel('reason', __('Reason'));
             $row->addTextArea('reason')->setRows(2)->required();
             
-        $row = $form->addRow();
-            $row->addButton('Submit', 'houseSave()', 'submit')->addClass('right');
+         $row = $form->addRow();
+            $row->addFooter();
+            $row->addSubmit();
 
         echo $form->getOutput();
 
