@@ -1,26 +1,45 @@
 <?php
-// manage house point categories
+/*
+Gibbon, Flexible & Open School System
+Copyright (C) 2010, Ross Parker
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+use Gibbon\Tables\DataTable;
+use Gibbon\Module\HousePoints\Domain\HousePointHouseGateway;
+
+require_once __DIR__ . '/moduleFunctions.php';
+
+$page->breadcrumbs->add(__('View points overall'));
 if (isActionAccessible($guid, $connection2,"/modules/House Points/overall.php")==FALSE) {
     //Acess denied
-    print "<div class='error'>" ;
-            print "You do not have access to this action." ;
-    print "</div>" ;
+    $page->addError(__('You do not have access to this action.'));
 } else {
-    
-    $page->breadcrumbs->add(__('View points overall'));
+    $housePointHouseGateway = $container->get(HousePointHouseGateway::class);
+    $housePoints = $housePointHouseGateway->selectAllPoints($session->get('gibbonSchoolYearID'))->fetchAll();
 
-    $modpath =  "./modules/".$_SESSION[$guid]["module"];
-    include $modpath."/function.php";
-    include $modpath."/overall_function.php";
-   
-    ?>
-    <script>
-        var modpath = '<?php echo $modpath ?>';
-    </script>
-    <?php
+    $table = DataTable::create('housePoints');
+    $table->setTitle('Overall House Points');
     
-    $over = new over($guid, $connection2);
-    $over->modpath = $modpath;
+    $table->addColumn('crest', __('Crest'))
+        ->format(function ($row) use ($session) {
+            if (!empty($row['houseLogo'])) {
+                return sprintf('<img src="%1$s" title="%2$s" style="width:auto;height:80px;">', $session->get('absoluteURL').'/'.$row['houseLogo'], $row['houseName'] );
+            }
+        });;
+    $table->addColumn('houseName', __('House'));
+    $table->addColumn('total', __('Points'));
     
-    $over->mainform();
+    echo $table->render($housePoints);
 }
