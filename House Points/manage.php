@@ -39,16 +39,31 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/individual.php
 
     echo $form0->getOutput();
     
-    echo "<br><div id='studentPoints'></div>";
+    echo "<br><div id='studentPoints'></div>";   
     
+    $form1 = Form::create('pointsHouse', '');
+    $form1->setFactory(DatabaseFormFactory::create($pdo));
+    $form1->addHiddenValue('yearID', $session->get('gibbonSchoolYearID'));
+    
+    $form1->setTitle('House Points');
+    $row = $form1->addRow();
+        $row->addLabel('houseID', __('House'));
+        $row->addSelectHouse('houseID')->placeholder();
+    
+    echo $form1->getOutput();
+    
+    echo "<br><div id='housePoints'></div>";
+
+
     //TODO: refine the JS and AJAX and maybe change the table into OO 
-    //TODO: ADD DELETE
+    //TODO: maybe move the deletes into a process page? also use a gateway
     ?>
-        <script>
+    
+    <script>
         $('#studentID').change(function() {
-            showIndividualPoint($('#studentID').val());
+            managePointStudent($('#studentID').val());
         });
-        function showIndividualPoint(studentID) {
+        function managePointStudent(studentID) {
             $.ajax({
                 url: "./modules/House Points/individual_ajax.php",
                 data: {
@@ -72,6 +87,7 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/individual.php
                                 html += "<th style='width:15%;'>Category</th>";
                                 html += "<th style='width:30%;'>Reason</th>";
                                 html += "<th style='width:20%;'>Awarded By</th>";
+                                html += "<th style='width:10%;'>Action</th>";
                             html += "</tr>";
                             $.each(points, function(i, pt) {
                                 total += parseInt(pt.points);
@@ -81,77 +97,119 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/individual.php
                                     html += "<td>" + pt.categoryName + "</td>";
                                     html += "<td>" + pt.reason + "</td>";
                                     html += "<td>" + pt.teacherName + "</td>";
+                                    html += "<td>";
+                                        //html += "<a href='#' class='edit' data-id='" + pt.hpID + "'>Edit</a>&nbsp;&nbsp;"; 
+                                        html += "<a href='#' class='deleteStudent' data-id='" + pt.hpID + "'>Delete</a>";
+                                    html += "</td>";
                                 html += "</tr>";
                             });
-                            html += "<tr>";
-                                html += "<td><strong>Total</strong></td>";
-                                html += "<td colspan='4'><strong>" + total + " points</strong></td>";
-                            html += "</tr>";
+                    
                         html += "</table>";
                     }
             
                     $('#studentPoints').html(html);
+            
+            
+                    $('.deleteStudent').click(function() {
+                        if (confirm("Delete this entry?")) {
+                            deletePointStudent(studentID, $(this).data('id'));
+                        }
+                    });
                 }
             });
         }
-        </script>
-    <?php
-    $form1 = Form::create('pointsClass', '');
-    $form1->setFactory(DatabaseFormFactory::create($pdo));
-    $form1->addHiddenValue('yearID', $session->get('gibbonSchoolYearID'));
+        $('#houseID').change(function() {
+                managePointHouse($('#houseID').val());
+            });
     
-    $form1->setTitle('Class Points');
-    $row = $form1->addRow();
-        $row->addLabel('classID', __('Class'));
-        $row->addSelectFormGroup('classID', $session->get('gibbonSchoolYearID'))->placeholder();
-    
-    echo $form1->getOutput();
-    
-    echo "<br><div id='classPoints'></div>";
-
-
-    //TODO: refine the JS and AJAX and maybe change the table into OO
-     //TODO: ADD DELETE
-    ?>
-    <script>
-        $('#classID').change(function() {
-            showClassPoint($('#classID').val());
-        });
-        function showClassPoint(classID) {    
+        function managePointHouse(houseID) {
             $.ajax({
-                url: "./modules/House Points/classpoints_ajax.php",
+                url: "./modules/House Points/house_ajax.php",
                 data: {
-                    classID: classID
+                    houseID: houseID
                 },
                 type: 'POST',
                 dataType: 'JSON',
                 success: function(data) {
                     console.log(data);
                     var points = data.points;
-                    var total;
             
                     var html = '';
-                    html += "<table style='width:100%;'>";
-                        html += "<tr>";
-                            html += "<th style='width:40%;'>Name</th>";
-                            html += "<th style='width:25%;'>Points</th>";
-                            html += "<th style='width:15%;'>House</th>";
-                        html += "</tr>";
-                        $.each(points, function(i, pt) {
-                            total = pt.total === null ? 0 : pt.total;
+                    if (points.length === 0) {
+                        html = "<p>No points have been awarded to this house</p>";
+                    } else {
+                        var total = 0;
+                        html += "<table style='width:100%;'>";
                             html += "<tr>";
-                                html += "<td>" + pt.surname + ", " + pt.preferredName + "</td>";
-                                html += "<td>" + total + "</td>";
-                                html += "<td>" + pt.houseName + "</td>";
+                                html += "<th style='width:15%;'>Date</th>";
+                                html += "<th style='width:10%;'>Points</th>";
+                                html += "<th style='width:15%;'>Category</th>";
+                                html += "<th style='width:30%;'>Reason</th>";
+                                html += "<th style='width:20%;'>Awarded By</th>";
+                                html += "<th style='width:10%;'>Action</th>";
                             html += "</tr>";
-                        });
-                    html += "</table>";
+                            $.each(points, function(i, pt) {
+                                total += parseInt(pt.points);
+                                html += "<tr>";
+                                    html += "<td>" + pt.awardedDate + "</td>";
+                                    html += "<td>" + pt.points + "</td>";
+                                    html += "<td>" + pt.categoryName + "</td>";
+                                    html += "<td>" + pt.reason + "</td>";
+                                    html += "<td>" + pt.teacherName + "</td>";
+                                    html += "<td>";
+                                        //html += "<a href='#' class='edit' data-id='" + pt.hpID + "'>Edit</a>&nbsp;&nbsp;"; 
+                                        html += "<a href='#' class='deleteHouse' data-id='" + pt.hpID + "'>Delete</a>";
+                                    html += "</td>";
+                                html += "</tr>";
+                            });
+                    
+                        html += "</table>";
+                    }
             
-                    $('#classPoints').html(html);
+                    $('#housePoints').html(html);
+            
+                    $('.deleteHouse').click(function() {
+                        if (confirm("Delete this entry?")) {
+                            deletePointHouse(houseID, $(this).data('id'));
+                        }
+                    });
+                }
+            });
+        }
+    
+        function deletePointHouse(houseID, hpID) {
+            $.ajax({
+                url: "./modules/House Points/manage_ajax.php",
+                data: {
+                    hpID: hpID,
+                    action: 'deleteItemHouse'
+                },
+                type: 'POST',
+                //dataType: 'JSON',
+                success: function(data) {
+                    console.log(data);
+                    managePointHouse(houseID);
+                }
+            });
+        }
+
+        function deletePointStudent(studentID, hpID) {
+            $.ajax({
+                url: "./modules/House Points/manage_ajax.php",
+                data: {
+                    hpID: hpID,
+                    action: 'deleteItemStudent'
+                },
+                type: 'POST',
+                //dataType: 'JSON',
+                success: function(data) {
+                    console.log(data);
+                    managePointStudent(studentID);
                 }
             });
         }
     </script>
+
     <?php
 }
 
