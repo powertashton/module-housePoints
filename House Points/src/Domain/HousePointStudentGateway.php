@@ -34,6 +34,7 @@ class HousePointStudentGateway extends QueryableGateway
 
         return $this->runSelect($select);
     }
+<<<<<<< HEAD
 
     public function selectStudentPointsSum($studentID, $yearID) {
         $select = $this
@@ -49,4 +50,7 @@ class HousePointStudentGateway extends QueryableGateway
         return $this->runSelect($select);
     }
         
+=======
+    
+>>>>>>> upstream/main
 }
