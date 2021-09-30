@@ -28,11 +28,9 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/award.php")==F
     $page->addError(__('You do not have access to this action.'));
 } else {
 
-    echo "<p>&nbsp;</p>";
-        echo "<h3>Award house points to house</h3>";
-
         $form = Form::create('awardForm', $session->get('absoluteURL') . '/modules/' . $session->get('module') . '/studentPointsProcess.php', 'post');
         $form->setFactory(DatabaseFormFactory::create($pdo));
+        $form->setTitle('Award house points to house');
         $form->addHiddenValue('address', $session->get('address'));
         $form->addHiddenValue('yearID', $session->get('gibbonSchoolYearID'));
         $form->addHiddenValue('teacherID', $session->get('gibbonPersonID'));
@@ -71,10 +69,10 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/award.php")==F
 
         echo $form->getOutput();
 
-        echo "<div>&nbsp;</div>";
-        echo "<p id='msg' style='color:blue;'></p>";
+        echo "<br><p id='msg' style='color:blue;'></p>";
         
         //TODO: rewrite the code to maybe use a chained or something rather than this weird ajax...
+        //TODO: this may require additions to the core src due to the nature of how it works, why do I get myself into these situations? :/
         ?>
         <script>
             $('#awardForm #categoryID').change(function(){
