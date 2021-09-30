@@ -34,5 +34,19 @@ class HousePointStudentGateway extends QueryableGateway
 
         return $this->runSelect($select);
     }
-    
+
+    public function selectStudentPointsSum($studentID, $yearID) {
+        $select = $this
+            ->newSelect()
+            ->from('hpPointStudent')
+            ->cols(['SUM(points) as points'])
+            ->where('hpPointStudent.studentID = :studentID')
+            ->bindValue('studentID', $studentID)
+            ->where('hpPointStudent.yearID = :yearID')
+            ->bindValue('yearID', $yearID)
+            ->orderBy(['hpPointStudent.awardedDate']);
+
+        return $this->runSelect($select);
+    }
+        
 }
