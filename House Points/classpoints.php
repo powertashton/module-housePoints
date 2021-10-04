@@ -45,13 +45,14 @@ if (isActionAccessible($guid, $connection2,"/modules/House Points/classpoints.ph
     ?>
     <script>
         $('#classID').change(function() {
-            showClassPoint($('#classID').val());
+            showClassPoint($('#classID').val(), $('input:hidden[name=yearID]').val());
         });
-        function showClassPoint(classID) {    
+        function showClassPoint(classID, yearID) {    
             $.ajax({
                 url: "./modules/House Points/classpoints_ajax.php",
                 data: {
-                    classID: classID
+                    classID: classID,
+                    yearID: yearID
                 },
                 type: 'POST',
                 dataType: 'JSON',
