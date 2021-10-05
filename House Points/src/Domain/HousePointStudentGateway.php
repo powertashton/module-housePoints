@@ -40,7 +40,7 @@ class HousePointStudentGateway extends QueryableGateway
         $select = $this
             ->newSelect()
             ->from('gibbonPerson')
-            ->cols(['gibbonPerson.officialName', 'gibbonPerson.surname', 'gibbonPerson.preferredName', 'gibbonHouse.name as houseName', 'SUM(hpPointStudent.points) AS total'])
+            ->cols(['gibbonPerson.gibbonPersonID', 'gibbonHouse.name as houseName', 'SUM(hpPointStudent.points) AS total'])
             ->innerJoin('gibbonStudentEnrolment', 'gibbonStudentEnrolment.gibbonPersonID = gibbonPerson.gibbonPersonID')
             ->leftJoin('hpPointStudent', 'hpPointStudent.studentID = gibbonStudentEnrolment.gibbonPersonID AND hpPointStudent.yearID = gibbonStudentEnrolment.gibbonSchoolYearID')
             ->leftJoin('gibbonHouse', 'gibbonHouse.gibbonHouseID=gibbonPerson.gibbonHouseID')
@@ -48,6 +48,7 @@ class HousePointStudentGateway extends QueryableGateway
             ->bindValue('yearID', $yearID)
             ->where('gibbonStudentEnrolment.gibbonFormGroupID = :classID')
             ->bindValue('classID', $classID)
+            ->groupBy(['gibbonStudentEnrolment.gibbonPersonID'])
             ->orderBy(['gibbonPerson.surname, gibbonPerson.preferredName']);
 
         return $this->runSelect($select);
