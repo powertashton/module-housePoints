@@ -52,4 +52,20 @@ class HousePointHouseGateway extends QueryableGateway
         return $this->runSelect($select);
     }
     
+    public function selectHousePoints($houseID, $yearID) {
+        $select = $this
+            ->newSelect()
+            ->from('hpPointHouse')
+            ->cols(['hpPointHouse.hpID', 'DATE_FORMAT(hpPointHouse.awardedDate, \'%d/%m/%Y\') AS awardedDate','hpPointHouse.points', 'hpCategory.categoryName','hpPointHouse.reason', 'CONCAT(gibbonPerson.title, \' \', gibbonPerson.preferredName, \' \', gibbonPerson.surname) AS teacherName'])
+            ->innerJoin('hpCategory','hpCategory.categoryID = hpPointHouse.categoryID')
+            ->innerJoin('gibbonPerson','gibbonPerson.gibbonPersonID = hpPointHouse.awardedBy')
+            ->where('hpPointHouse.houseID = :houseID')
+            ->bindValue('houseID', $houseID)
+            ->where('hpPointHouse.yearID = :yearID')
+            ->bindValue('yearID', $yearID)
+            ->orderBy(['hpPointHouse.awardedDate']);
+
+        return $this->runSelect($select);
+    }
+    
 }
